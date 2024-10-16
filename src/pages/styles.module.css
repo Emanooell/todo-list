@@ -1,0 +1,94 @@
+.container {
+  display: flex;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.taskList {
+  list-style-type: none;
+  padding: 0;
+}
+.img {
+  cursor: pointer;
+}
+.input {
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 2px solid #0070f3;
+  border-radius: 100%;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.3s ease;
+}
+
+.input:checked {
+  background-color: #0070f3;
+}
+
+.taskItem {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  align-items: center;
+  text-align: left;
+}
+
+.addButton {
+  padding: 10px 20px;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.addButton:hover {
+  background-color: #005bb5;
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .taskItem {
+    width: 250px;
+    padding: 8px 12px;
+  }
+
+  .addButton {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    padding: 10px;
+  }
+}
