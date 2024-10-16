@@ -1,5 +1,3 @@
-
-
 export default function Home() {
-  return <h4>testing</h4>;
+  return <h4>Tela inicial do TODO LIST</h4>;
 }
