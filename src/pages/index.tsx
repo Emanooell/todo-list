@@ -3,67 +3,60 @@ import { useRouter } from "next/router";
 import styles from "./styles.module.css";
 import trashIcon from "./trash.svg";
 import Image from "next/image";
-import ModalConfirm from "@/components/modalConfirm"; // Certifique-se que o caminho está correto
+import ModalConfirm from "@/components/modalConfirm";
 
 export default function Tasks() {
   const router = useRouter();
   const [completedTasks, setCompletedTasks] = useState<string[]>([]);
   const [tasks, setTasks] = useState<string[]>([]);
   const [checkedTasks, setCheckedTasks] = useState<number[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para modal
-  const [taskToDelete, setTaskToDelete] = useState<number | null>(null); // Estado para armazenar o índice da tarefa a ser deletada
-  const [isCompletedTask, setIsCompletedTask] = useState(false); // Estado para saber se a tarefa é completada
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [taskToDelete, setTaskToDelete] = useState<number | null>(null);
+  const [isCompletedTask, setIsCompletedTask] = useState(false);
 
-  // Carregar as tarefas do localStorage quando a página é montada
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
     setTasks(storedTasks);
   }, []);
 
-  // Abre o modal e define a tarefa que será deletada (para tarefas em andamento)
   const handleDeleteTask = (index: number) => {
     setTaskToDelete(index);
-    setIsCompletedTask(false); // É uma tarefa em andamento
-    setIsModalOpen(true); // Abre o modal de confirmação
+    setIsCompletedTask(false);
+    setIsModalOpen(true);
   };
 
-  // Abre o modal e define a tarefa completada que será deletada
   const handleDeleteCompletedTask = (index: number) => {
     setTaskToDelete(index);
-    setIsCompletedTask(true); // É uma tarefa completada
-    setIsModalOpen(true); // Abre o modal de confirmação
+    setIsCompletedTask(true);
+    setIsModalOpen(true);
   };
 
-  // Completa a tarefa
   const completeTask = (index: number) => {
     const taskToComplete = tasks[index];
     setCompletedTasks([...completedTasks, taskToComplete]);
     const updatedTasks = tasks.filter((_, i) => i !== index);
     setTasks(updatedTasks);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks)); // Atualizar o localStorage
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     setCheckedTasks(checkedTasks.filter((i) => i !== index));
   };
 
-  // Confirma a exclusão da tarefa (em andamento ou completada)
   const confirmDeleteTask = () => {
     if (taskToDelete !== null) {
       if (isCompletedTask) {
-        removeCompletedTask(taskToDelete); // Remove a tarefa completada
+        removeCompletedTask(taskToDelete);
       } else {
-        removeTask(taskToDelete); // Remove a tarefa em andamento
+        removeTask(taskToDelete);
       }
-      setIsModalOpen(false); // Fecha o modal após a exclusão
-      setTaskToDelete(null); // Reseta a tarefa selecionada
+      setIsModalOpen(false);
+      setTaskToDelete(null);
     }
   };
 
-  // Cancela a exclusão da tarefa
   const cancelDelete = () => {
-    setIsModalOpen(false); // Fecha o modal
-    setTaskToDelete(null); // Reseta a tarefa selecionada
+    setIsModalOpen(false);
+    setTaskToDelete(null);
   };
 
-  // Lida com a mudança de seleção da checkbox
   const handleCheckboxChange = (index: number) => {
     if (checkedTasks.includes(index)) {
       setCheckedTasks(checkedTasks.filter((i) => i !== index));
@@ -73,15 +66,13 @@ export default function Tasks() {
     }
   };
 
-  // Remove a tarefa
   const removeTask = (index: number) => {
     const updatedTasks = tasks.filter((_, i) => i !== index);
     setTasks(updatedTasks);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks)); // Atualizar o localStorage
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     setCheckedTasks(checkedTasks.filter((i) => i !== index));
   };
 
-  // Remove a tarefa completada
   const removeCompletedTask = (index: number) => {
     setCompletedTasks(completedTasks.filter((_, i) => i !== index));
   };
@@ -104,7 +95,7 @@ export default function Tasks() {
                 className={styles.img}
                 src={trashIcon}
                 alt="Icone de lixeira"
-                onClick={() => handleDeleteTask(index)} // Abre o modal para tarefas em andamento
+                onClick={() => handleDeleteTask(index)}
               />
             </div>
           </li>
@@ -121,7 +112,7 @@ export default function Tasks() {
                   className={styles.img}
                   src={trashIcon}
                   alt="Icone de lixeira"
-                  onClick={() => handleDeleteCompletedTask(index)} // Abre o modal para tarefas completadas
+                  onClick={() => handleDeleteCompletedTask(index)}
                 />
               </div>
             </li>
@@ -137,8 +128,8 @@ export default function Tasks() {
 
       {isModalOpen && (
         <ModalConfirm
-          onDelete={confirmDeleteTask} // Função para confirmar a exclusão
-          onCancel={cancelDelete} // Função para cancelar a exclusão
+          onDelete={confirmDeleteTask}
+          onCancel={cancelDelete}
         />
       )}
     </div>
