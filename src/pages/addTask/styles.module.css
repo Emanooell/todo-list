@@ -6,7 +6,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
   padding: 20px;
   background-color: #f0f0f0;
   border-radius: 10px;
@@ -19,45 +18,42 @@
   color: #333;
 }
 
-.taskList {
-  list-style-type: none;
-  padding: 0;
-  overflow-y: auto;
-  max-height: 60vh;
-  margin-bottom: 20px;
-}
-.img {
-  cursor: pointer;
-}
-.input {
-  appearance: none;
-  width: 15px;
-  height: 15px;
-  border: 2px solid #0070f3;
-  border-radius: 100%;
-  cursor: pointer;
-  outline: none;
-  transition: background 0.3s ease;
-}
-
-.input:checked {
-  background-color: #0070f3;
-}
-
-.taskItem {
-  display: flex;
-  justify-content: space-between;
-  background-color: #fff;
-  padding: 10px 15px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.input,
+.inputError {
   width: 300px;
-  align-items: center;
+  padding: 10px;
+  border: 2px solid #0070f3;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  outline: none;
+}
+.inputError {
+  border: 2px solid red;
+}
+.containerError {
+  margin: 0;
+  padding: 0;
   text-align: left;
+  padding-left: 5px;
+  margin-top: -15px;
+  z-index: 1;
 }
 
-.addButton {
+.error {
+  position: absolute;
+  color: red;
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 1;
+}
+.containerButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 30px;
+}
+.addButton,
+.backButton {
   padding: 10px 20px;
   background-color: #0070f3;
   color: white;
@@ -67,30 +63,31 @@
   transition: background-color 0.3s ease;
 }
 
-.addButton:hover {
+.addButton:hover,
+.backButton:hover {
   background-color: #005bb5;
+}
+
+.backButton {
+  background-color: #888;
 }
 
 @media screen and (max-width: 800px) {
   .container {
     padding: 15px;
   }
-
   .title {
     font-size: 20px;
   }
-
-  .taskItem {
+  .input {
     width: 250px;
-    padding: 8px 12px;
   }
 
-  .addButton {
+  .addButton,
+  .backButton {
     padding: 8px 15px;
-    font-size: 14px;
   }
 }
-
 @media screen and (max-width: 500px) {
   .container {
     padding: 0px;
