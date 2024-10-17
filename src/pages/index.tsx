@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
-import trashIcon from "./trash.svg";
+import trashIcon from "../../public/trash.svg";
+
 import Image from "next/image";
 import ModalConfirm from "@/components/modalConfirm";
 

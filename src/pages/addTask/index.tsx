@@ -11,7 +11,7 @@ export default function AddTask() {
       const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
       tasks.push(task);
       localStorage.setItem("tasks", JSON.stringify(tasks));
-      router.push("/"); // Redireciona para a tela Home
+      router.push("/"); 
     }
   };
   const onSubmit = (e: FormEvent) => {

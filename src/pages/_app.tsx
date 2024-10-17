@@ -1,4 +1,4 @@
-// src/pages/_app.tsx
+
 import "../globals.css";
 import { AppProps } from "next/app";
 

@@ -1,4 +1,4 @@
-import styles from "./styles.module.css"; // Supondo que você tenha um arquivo styles.module.css
+import styles from "./styles.module.css"; 
 interface Imodal {
   onDelete: () => void;
   onCancel: () => void;
